@@ -26,9 +26,12 @@ app.get('/', function (req, res) {
      res.sendFile(process.cwd() + '/views/index.html');
   });
 
-app.post('/profile', upload.single('avatar'), function (req, res, next) {
+app.post('/profile', upload.single('upfile'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
+  
+  const { filename, mimetype, size} = req.file;
+  res.json({"name":filename, "type":mimetype,"size":size}
 })
 
 
