@@ -3,7 +3,7 @@
 var express = require('express');
 var cors = require('cors');
 var multer  = require('multer')
-var upload = multer({ dest: '/uploads/' })
+var upload = multer({ dest: process.env.TMPDIR })
 
 const mongoose = require('mongoose')
 mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track' )
@@ -13,6 +13,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   username:{type:String,required:true},
 }); 
+
 
 // require and use "multer"...
 
