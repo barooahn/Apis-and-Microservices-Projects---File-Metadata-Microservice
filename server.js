@@ -2,18 +2,8 @@
 
 var express = require('express');
 var cors = require('cors');
-var multer  = require('multer')
-var upload = multer({ dest: process.env.TMPDIR })
-
-const mongoose = require('mongoose')
-mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track' )
-
-const Schema = mongoose.Schema;
-
-const userSchema = new Schema({
-  file:{type:String,required:true},
-}); 
-
+var multer  = require('multer');
+var upload = multer({ dest: process.env.TMPDIR });
 
 // require and use "multer"...
 
@@ -26,18 +16,14 @@ app.get('/', function (req, res) {
      res.sendFile(process.cwd() + '/views/index.html');
   });
 
-app.post('/profile', upload.single('upfile'), function (req, res, next) {
+app.post('/api/fileanalyse', upload.single('upfile'), function (req, res, next) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   
-  const { filename, mimetype, size} = req.file;
-  res.json({"name":filename, "type":mimetype,"size":size}
-})
-
-
-app.get('/hello', function(req, res){
-  res.json({greetings: "Hello, API"});
+  const { originalname, mimetype, size} = req.file;
+  res.json({"name":originalname, "type":mimetype,"size":size});
 });
+
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Node.js listening ...');
