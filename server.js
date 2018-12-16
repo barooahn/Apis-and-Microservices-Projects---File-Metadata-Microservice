@@ -11,7 +11,7 @@ mongoose.connect(process.env.MLAB_URI || 'mongodb://localhost/exercise-track' )
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username:{type:String,required:true},
+  file:{type:String,required:true},
 }); 
 
 
